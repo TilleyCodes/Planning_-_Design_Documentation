@@ -21,8 +21,12 @@
     - [Agile](#agile)  
     - [Kanban](#kanban)  
 7. [Task Management Methodology](#task-management-methodology)    
-8. [Testing](#testing)    
-    - [API Endpoints](#api-endpoints)  
+8. [Client/Server Architecture](#client/server-architecture)   
+    - [Client/Server Communication](#client/server-communication)   
+    - [Data Distribution](#data-distribution) 
+    - [](#)    
+    - [](#) 
+    - [](#) 
 9. [License](#license)  
 10. [Database System](#database-system)  
 
@@ -230,3 +234,67 @@ I will be using Trello to manage tasks for my Book A Doc system, I can take adva
 progress, and prioritise tasks. Each task will be created as a Trello card that I can move across these columns as work progresses. For example:
 
 ![Trello Card Diagram](images/trello_card.png)
+
+## Client/Server Architecture
+
+![Client Server Architecture Diagram.](images/client_server_architecture.png)
+
+Client/server architecture is computing model in which multiple clients (users or devices) communicate with a server (central system) over a network. The server provides services like processing requests, storing data, and managing authentication, while the client handles user interactions.  
+
+This architecture is widely used in web applications, mobile apples, and cloud-based platforms. My Book A Doc system follows this model, where a frontend client communicates with the backend server (Node.js, Express.js, MongDB).  
+
+### Client/Server Communication
+
+![Client Server Communication Diagram](images/client_server_communication.png)
+
+Client and server communication happens using HTTP or HTTPS request via RESTful APIs or WebSockets. 
+In my Book A Doc system, the client (user interface) will send requests to the server to:
+
+- fetch available doctors and medical centres
+- book an appointment
+- authenticate user through sign up, login and logout
+
+An example of client request to book an appointment:
+```bash
+async function bookAppointment() 
+    const response = await fetch("/api/bookings", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify ({
+            patientId: "17",
+            doctorId: "5",
+            date: "2025-02-10"
+        })
+    });
+```
+
+An example of the server response:
+```bash
+{
+    "message": "Confirmed",
+    "booking": {
+        "patient": 17,
+        "doctor": 5,
+        "date": ""2025-02-10
+    }
+}
+```
+
+### Data Distribution
+
+![Date Distribution Diagram](images/data_distribution.png)
+
+In client/server architecture, data can be stored and processed in different ways:  
+
+1. **centralised storage:** data is stored on the server like MongoDB    
+2. **cached Data:** frequently accessed data like doctor lists is cached to improve performance    
+3. **client side storage:** the client may store small amounts of data like authentication tokens in local storage  
+
+How my Book A Doc system will handle data distribution:  
+
+- patient, doctor, and booking data is stored in MongoDB on the server  
+- session tokens for logged-in users are stored on the client local storage. For example, when a user searches for doctors, the frontend may cache results so that repeated searches load faster  
+- cached API responses can be used for static data like list of specialties for doctors. For example, when a user logs in, their session token is stored in local storage for authentication  
+
