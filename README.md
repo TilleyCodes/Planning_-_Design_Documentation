@@ -7,13 +7,20 @@
     - [Entities, Relationships, and Foreign Keys](#entities-relationships-foreign-keys)  
 3. [Features and Functions](#features-and-functions)  
 4. [Programming Paradigm](#programming-paradigm)  
+    - [Imperative programming](#imperative-programming)  
+        - [Procedural programming](#procedural-programming)  
+        - [Object oriented programming](#object-oriented-programming)
+    - [Declarative programming](#declarative-programming)  
+        - [Functional programming](#functional-programming)    
+        - [Logic programming](#logic-programming)  
 5. [Software Architecture Pattern](#software-architecture-pattern)  
-    - [Virtual Environment Set Up](#virtual-environment-set-up)
-    - [Packages](#packages)  
-6. [Set Up](#set-up)  
-    - [PostgreSQL](#postgreSQL)  
-    - [zsh](#zsh)  
-7. [Deployment](#deployment)    
+    - [Layer Architecture](#layer-architecture)
+    - [Model View Controller](#model-view-controller) 
+    - [Event Driven Architecture ](#event-driven-architecture) 
+6. [Project Management Methodology](#project-management-methodology)  
+    - [Agile](#agile)  
+    - [Kanban](#kanban)  
+7. [Task Management Methodology](#task-management-methodology)    
 8. [Testing](#testing)    
     - [API Endpoints](#api-endpoints)  
 9. [License](#license)  
@@ -102,7 +109,7 @@ const formatDate = (date) => newDate(date).isISOString() .split("T")[0]
 
 A software architecture pattern is a general structure or blueprint that defines how components of an application interact with each other.  
 It provides a framework for organising an application's codebase, and helps developers organise code in a way that is scalable, maintainable, efficient.  
-Here are some of the most common architectural patterns:  
+Common architectural patterns:  
 
 - **Monolithic Architecture** a single tightly integrated codebase    
 - **Layered (N-Tier) Architecture** separates an application into logical layers    
@@ -165,3 +172,61 @@ I will use event driven architecture to handle and respond to API requests
 // handles booking when patient submits a booking request
 app.post("/bookings", (req, res) => {})
 ```
+
+## Project Management Methodology
+
+[Project Management Methodology Diagram](images/project_management_methodology.png)
+
+A project management methodology is a structured framework that guides the planning, execution, and completion of a project.   
+It defines the processes, roles, and workflows for teams to follow to ensure efficiency, collaboration, and successful delivery.  
+Common project management methodologies:    
+
+- **Waterfall** a linear, step by step approach where each phase must be completed before moving to the next  
+- **Agile** a flexible, iterative approach that encourages collaboration and adapting to change  
+- **Scrum** a framework under Agile that organises work into short cycle sprints
+- **Kanban** a visual workflow method that manages work using a board with tasks at different stages
+- **Lean** a methodology focused on minimising waste and maximising value    
+
+Since my Book A Doc system is a solo project, I need a methodology that is allows flexibility while keeping progress structured.   
+To manage this project I will apply the agile and kanban methodology.   
+
+### Agile
+
+![Agile Methodology Diagram](images/agile.png)
+
+Agile focuses on continuous development and improvement, making it a good fit for a coding project where requirements might evolve.  
+I will use the following agile principles:  
+
+- **Iterative Development** building the system in small, testable parts instead of all at once     
+- **Frequent Testing** continuously testing component like user authentication and booking logic  
+- **Feedback Driven Improvements** adjusting based on testing results or feedback from my peers  
+
+For example, instead of completing the entire system before testing, I would:  
+1. develop user authentication - test and refine  
+2. add booking functionality - test again before moving to the next feature  
+3. improve based on feedback  
+
+### Kanban
+
+![Kanban Methodology Diagram](images/kanban.png)
+
+A kanban board is a simple and effective way to manage tasks. It consists of columns representing different stages of work.     
+Each task moves from left to right as your work progresses. The visual layout helps to identify bottleneck and ensure tasks are completed efficiently.    
+To keep track of my progress, I will use the kanban methodology to orgainse tasks into visual categories like:  
+
+- To Do - eg. set up database models 
+- In Progress  - eg. plan and design documentation
+- Completed  - eg. ERD   
+
+## Task Management Methodology  
+
+![Trello Diagram](images/trello.png)
+
+A task management methodology is a structured approach to planning, organising, tracking, and completing tasks efficiently. It ensures tasks are prioritised, dependencies are managed, and work is completed within deadlines.  
+
+Task management is crucial in software development, where multiple tasks, like writing code, testing, debugging, and deploying need to be handled systematically. By following  a structures methodology, developers can break down large projects into manageable pieces, track progress, and ensure timely completion.  
+
+I will be using Trello to manage tasks for my Book A Doc system, I can take advantage of its kanban style board, which allows me to visually track
+progress, and prioritise tasks. Each task will be created as a Trello card that I can move across these columns as work progresses. For example:
+
+![Trello Card Diagram](images/trello_card.png)
