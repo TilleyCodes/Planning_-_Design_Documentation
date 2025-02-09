@@ -21,12 +21,12 @@
     - [Agile](#agile)  
     - [Kanban](#kanban)  
 7. [Task Management Methodology](#task-management-methodology)    
-8. [Client/Server Architecture](#client/server-architecture)   
+8. [Client/Server Architecture Fundamentals and Implementation](#client/server-architecture-fundamentals-and-implemention)   
     - [Client/Server Communication](#client/server-communication)   
     - [Data Distribution](#data-distribution) 
-    - [](#)    
-    - [](#) 
-    - [](#) 
+    - [Feature Distribution](#feature-distribution)    
+    - [Authorisation](#authorisation) 
+    - [Validation](#validation) 
 9. [License](#license)  
 10. [Database System](#database-system)  
 
@@ -235,7 +235,7 @@ progress, and prioritise tasks. Each task will be created as a Trello card that 
 
 ![Trello Card Diagram](images/trello_card.png)
 
-## Client/Server Architecture
+## Client/Server Architecture Fundamentals and Implementation  
 
 ![Client Server Architecture Diagram.](images/client_server_architecture.png)
 
@@ -296,5 +296,34 @@ How my Book A Doc system will handle data distribution:
 
 - patient, doctor, and booking data is stored in MongoDB on the server  
 - session tokens for logged-in users are stored on the client local storage. For example, when a user searches for doctors, the frontend may cache results so that repeated searches load faster  
-- cached API responses can be used for static data like list of specialties for doctors. For example, when a user logs in, their session token is stored in local storage for authentication  
+- cached API responses can be used for static data like list of specialties for doctors. For example, when a user logs in, their session token is stored in local storage for authentication    
+
+### Feature Distribution
+
+![Feature Distribution Diagram](images/feature_distribution.png)    
+ 
+Feature distribution refers to which tasks are handled by the client vs the server.    
+How my Book A Doc system will distribute features:    
+
+- **Client Frontend** UI display, basic validation, sending requests  
+- **Server Backend** database operations, authentication, business logic  
+
+![Book A Doc Feature Distribution Diagram](images/my_feature_distribution.png)  
+
+### Authorisation
+
+Authorisation and authentication ensure secure access control:
+
+- **Authorisation:** verifies who a user is through login with email and password
+- **Authentication:** determines what a user can do. For example in my Book A Doc system, only a logged in patient can book an appointment.
+
+How my Book A doc system will handle authorisation and authentication: 
+
+1. **user logs in:** sends credentials to /api/auth/login
+2. **server verifies credentials:** if correct, it issues a JWT token
+3. **user accesses protected routes:** the client includes the JWT token is future requests
+4. **server verifies token:** if valid, it allows access
+
+### Validation
+
 
