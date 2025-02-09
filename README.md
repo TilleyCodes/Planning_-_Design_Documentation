@@ -24,8 +24,9 @@
 8. [Client/Server Architecture Fundamentals and Implementation](#client/server-architecture-fundamentals-and-implemention)   
     - [Client/Server Communication](#client/server-communication)   
     - [Data Distribution](#data-distribution) 
+    - [Data Security](#data-security)   
     - [Feature Distribution](#feature-distribution)    
-    - [Authorisation](#authorisation) 
+    - [Authorisation and Authentication](#authorisation-and-athentication) 
     - [Validation](#validation) 
 9. [License](#license)  
 10. [Database System](#database-system)  
@@ -80,14 +81,16 @@ There are two types of programming paradigm:
 Since my Book A Doc system involves handling user requests, managing data, and ensuring smooth functionality. 
 I will use a mix of paradigms:  
 - **Imperative Programming** for step by step processes like authentication an database transactions
-- **Procedural Programming** for structuring routes and handling requests in Express.js  
+- **Procedural Programming** for structuring routes and handling requests in Express.js   
+
 ```bash
 // validating input and checking Dr availability
 function createBooking(req, res) {
     const { patientId, doctorId, date } = req.body;
 }
 ```
-- **Object oriented Programming** for managing patients, doctors and bookings using Mongoose models  
+- **Object oriented Programming** for managing patients, doctors and bookings using Mongoose models   
+
 ```bash
 // define schemas and models to represent Patient entity
 const Patient = new mongoose.Schema ({
@@ -97,11 +100,13 @@ const Patient = new mongoose.Schema ({
     password: String    
 })
 ```
-- **Declarative Programming** for MongoDB queries  
+- **Declarative Programming** for MongoDB queries
+
 ```bash
 Doctor.find({ specialty: "Women's Health", available: true });
 ```
 - **Functional Programming** for writing reusable utility functions
+
 ```bash
 // formatting dates
 const formatDate = (date) => newDate(date).isISOString() .split("T")[0]
@@ -133,7 +138,8 @@ In my application, I will have:
 
 - Presentation Layer (Frontend in the future)  
     - handles user interaction (UI)  
-    - displays available doctors, medical centres, and bookings 
+    - displays available doctors, medical centres, and bookings   
+
 ```bash
 // route/bookingRoutes.js
 const express = require("express");
@@ -147,7 +153,8 @@ router.post("/", bookingController.createBooking);
 router.get("/", bookingController.getBookings);
 
 module.exports = router;
-```
+```  
+
 - Application Layer (Express.js API)   
     - process user requests such as login and book an appointment  
     - ensure business logic is executed correctly  
@@ -171,7 +178,8 @@ I will structure my Express.js using the MVC pattern:
 
 ![Event Driven Diagram](images/event_driven.png)
 
-I will use event driven architecture to handle and respond to API requests
+I will use event driven architecture to handle and respond to API requests:  
+
 ```bash
 // handles booking when patient submits a booking request
 app.post("/bookings", (req, res) => {})
@@ -254,7 +262,8 @@ In my Book A Doc system, the client (user interface) will send requests to the s
 - book an appointment
 - authenticate user through sign up, login and logout
 
-An example of client request to book an appointment:
+An example of client request to book an appointment:  
+
 ```bash
 async function bookAppointment() 
     const response = await fetch("/api/bookings", {
@@ -270,7 +279,8 @@ async function bookAppointment()
     });
 ```
 
-An example of the server response:
+An example of the server response:  
+
 ```bash
 {
     "message": "Confirmed",
@@ -286,7 +296,7 @@ An example of the server response:
 
 ![Date Distribution Diagram](images/data_distribution.png)
 
-In client/server architecture, data can be stored and processed in different ways:  
+In client/server architecture, data can be stored and processed in different ways to optimise performance and security:  
 
 1. **centralised storage:** data is stored on the server like MongoDB    
 2. **cached Data:** frequently accessed data like doctor lists is cached to improve performance    
@@ -298,6 +308,29 @@ How my Book A Doc system will handle data distribution:
 - session tokens for logged-in users are stored on the client local storage. For example, when a user searches for doctors, the frontend may cache results so that repeated searches load faster  
 - cached API responses can be used for static data like list of specialties for doctors. For example, when a user logs in, their session token is stored in local storage for authentication    
 
+
+### Data Security
+
+Data security protects confidential information from the unauthorised access, theft, or corruption.  
+How my Book A Doc system ensure data security:  
+
+- **encryption:** passwords are hashed with bcrypt before storage
+- **HTTPS communication:** all API calls use HTTPS to encrypt data in transit
+- **role based access control (RBAC):** patients cannot access other user's booking
+- **cross origin resource sharing (CORS):** controls which clients can access my API
+- **data security:** sensitive fields such as passwords are never stored in plain text
+
+An example of password hashing with bcrypt.js  
+
+```bash
+const bcrypt = require("bcrypt");
+
+const hashPassword = async (password) => {
+    const salt = await bcrypt.genSlat(10);
+    return await bcrypt.hash(password, salt);
+};
+```  
+
 ### Feature Distribution
 
 ![Feature Distribution Diagram](images/feature_distribution.png)    
@@ -305,12 +338,14 @@ How my Book A Doc system will handle data distribution:
 Feature distribution refers to which tasks are handled by the client vs the server.    
 How my Book A Doc system will distribute features:    
 
-- **Client Frontend** UI display, basic validation, sending requests  
-- **Server Backend** database operations, authentication, business logic  
+- **Client-side Frontend** UI display, basic validation, sending requests  
+- **Server-side Backend** database operations, authentication, business logic  
 
 ![Book A Doc Feature Distribution Diagram](images/my_feature_distribution.png)  
 
-### Authorisation
+### Authorisation and Authentication  
+
+![Authentication Diagram](images/authentication.png)  
 
 Authorisation and authentication ensure secure access control:
 
@@ -324,6 +359,57 @@ How my Book A doc system will handle authorisation and authentication:
 3. **user accesses protected routes:** the client includes the JWT token is future requests
 4. **server verifies token:** if valid, it allows access
 
-### Validation
+A code example:  
 
+```bash
+const jwt = require("jsonwebtoken")
+
+const User = require("../models/user")
+
+const checkIfAdmin = async (req, res, next) => {
+    let token = req.get("authorization") // Bearer the-actual-token
+    token = token?.split(" ")?.[1] // the-actual-token
+    if (!token) {
+        return res.status(401).json({ error: "Unauthenticated" })
+    }
+    try {
+        const payload = jwt.verify(token, "secret")
+        const user = await User.findById(payload.id)
+        if (!user.is_admin) {
+            throw new Error()
+        }
+        req.userId = payload.id
+        next()
+    } catch(err) {
+        console.log(err)
+        return res.status(401).json({ error: "Unauthenticated / not an admin" })
+    }
+}
+
+module.exports = checkIfAdmin
+```
+
+### Validation  
+
+![Validation Diagram](images/validation.png)    
+
+Validation ensures data integrity and security by preventing incorrect or malicious input. It occurs on both the client and server.   
+
+- Client-side Validation:
+    - checks basic input before sending data to the server, eg. email format
+    - improves user experience by providing instant feedback. For example:  
+
+```bash
+function validateEmail(email) {
+    return email.includes("@") ? true : "Invalid email format";
+}
+```
+- Server-side Validation:  
+    - ensures data meets strict requirements before being stored  
+    - prevents security vulnerabilities like   
+
+How my Book A doc system uses validation:  
+
+- **client-side validation** for instant feedback eg. highlighting incorrect form fields  
+- **server-side validation** for security & data integrity eg. ensuring valid doctor IDs in booking
 
