@@ -28,7 +28,7 @@
     - [Feature Distribution](#feature-distribution)    
     - [Authorisation and Authentication](#authorisation-and-athentication) 
     - [Validation](#validation) 
-9. [License](#license)  
+9. [User Stories for Book A Doc](#user-stories-for-book-a-doc)  
 10. [Database System](#database-system)  
 
 ## Introduction
@@ -405,11 +405,19 @@ function validateEmail(email) {
 }
 ```
 - Server-side Validation:  
-    - ensures data meets strict requirements before being stored  
-    - prevents security vulnerabilities like   
+    - ensures data meets strict requirements before being stored    
+    - prevents security vulnerabilities like     
 
-How my Book A doc system uses validation:  
+How my Book A doc system uses validation:    
 
-- **client-side validation** for instant feedback eg. highlighting incorrect form fields  
-- **server-side validation** for security & data integrity eg. ensuring valid doctor IDs in booking
+- **client-side validation** for instant feedback eg. highlighting incorrect form fields    
+- **server-side validation** for security & data integrity eg. ensuring valid doctor IDs in booking  
 
+## User Stories for Book A Doc
+
+1. Patient user stories:  
+- as a patient, I want to create an account so that I can book and manage my appointments securely
+    - only registered users should be able to book appointments, ensuring patient information is stored securely
+as a patient, 
+2. Doctor user stories
+3. Admin user stories
