@@ -415,9 +415,58 @@ How my Book A doc system uses validation:
 
 ## User Stories for Book A Doc
 
-1. Patient user stories:  
-- as a patient, I want to create an account so that I can book and manage my appointments securely
-    - only registered users should be able to book appointments, ensuring patient information is stored securely
-as a patient, 
-2. Doctor user stories
-3. Admin user stories
+1. Patient user stories: 
+
+- **feature:** user sign up and login
+    - as a patient, I want to create an account so that I can book and manage my appointments securely  
+    - **justification:** only registered users should be able to book appointments, ensuring patient information is stored securely  
+
+ - **feature:** search for Doctors and Medical Centres
+    - as a patient, I want to search for doctors by specialty and location so that I can find a suitable GP near me  
+    - **justification:** patients need a convenient way to find doctors that fit their needs without manually browsing through an entire list 
+
+- **feature:** booking an appointment  
+    - as a patient, I want to select an available time slot for a doctor so that I can schedule an appointment that fits my schedule    
+    - **reason:** I want flexibility in choosing a time that fits into my schedule    
+
+- **feature:** appointment management
+    - as a patient, I want to view, reschedule, or cancel my appointments so thatI can manage my healthcare easily  
+    - **reason:** I don't want to have to call to cancel or reschedule 
+   
+2. Doctor user stories: 
+Doctors use the system to manage their schedules and view patients appointments
+
+- **feature:** managing availability    
+    - as a doctor, I want to update my availability so that patients can only book appointments when I am free    
+    - **reason:** I need to control my schedule to avoid double bookings   
+
+- **feature:** viewing my schedule  
+    - as a doctor, I want to see my upcoming appointments so that I can prepare for my patient in advance  
+    - **reason:** I just need a quick overview of my schedules  
+
+- **feature:** managing appointments  
+    - as a doctor, I want to approve or decline appointment requests so that I can ensure availability before confirming bookings  
+    - **justification:** Doctors may have emergencies or last minute schedule changes and need control over their appointments  
+
+- **feature:** patient contact information  
+    - as a doctor, I want to view a patient's contact details so that i can reach out if necessary   
+    - **justification:** Doctors may need to contact patients for follow ups or appointment changes     
+
+3. Admin user stories:  
+Admins oversee the platform, ensuring smooth operations and handling user management, security, and system monitoring  
+
+- **feature:** user management  
+    - as an admin, I want to manage patient and doctor accounts so that I can ensure system security and remove inactive users    
+    - **justification:** the system needs administrative control to prevent unauthorised access and manage users  
+
+- **feature:** overseeing appointments
+    - as an admin, I want to monitor all booked appointments so that I can resolve disputes or system issues  
+    - **justification:** admins need visibility into booking in case of patient complaints or system failures  
+
+- **feature:** monitoring system performance
+    - as an admin, I want to track server uptime and errors so that I can quickly fix technical issues  
+    - **reason:** I don't want users to experience downtime, so I need to catch issues early
+
+- **feature:** ensuring data security
+    - as an admin, I want to enforce security policies and restrict access so that patient data remains confidential  
+    - **reason:** the system has sensitive medical information, and proper security measures are necessary to comply with privacy laws  
