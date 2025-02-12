@@ -29,7 +29,7 @@
     - [Authorisation and Authentication](#authorisation-and-athentication) 
     - [Validation](#validation) 
 9. [User Stories for Book A Doc](#user-stories-for-book-a-doc)  
-10. [Ethical Principles](#ethicl-principles)    
+10. [Ethical Principles](#ethical-principles)    
     - [Privacy and Data Protection](#privacy-and-data-protection)   
     - [Security and Data Integrity](#security-and-data-security)     
     - [Transparency](#transparency)   
@@ -66,7 +66,7 @@ A programming paradigm is a way of thinking about and structuring code. It’s a
 Different paradigms influence how developers solve problems, structure data, and manage the flow of logic in the application.  
 There are two types of programming paradigm:  
 
-1. **Imperative programming:** code is written as a sequence of instruction that changes the program's state step by step  
+1. **Imperative programming:** code is written as a sequence of instructions that changes the program's state step by step  
 - **Procedural programming:**  
     - organised into procedures or functions that manipulate data for reusability
 - **Object oriented programming:**   
@@ -204,7 +204,7 @@ Common project management methodologies:
 - **Kanban** a visual workflow method that manages work using a board with tasks at different stages
 - **Lean** a methodology focused on minimising waste and maximising value    
 
-Since my Book A Doc system is a solo project, I need a methodology that is allows flexibility while keeping progress structured.   
+Since my Book A Doc system is a solo project, I need a methodology that allows flexibility while keeping progress structured.   
 To manage this project I will apply the agile and kanban methodology.   
 
 ### Agile
@@ -228,8 +228,8 @@ For example, instead of completing the entire system before testing, I would:
 ![Kanban Methodology Diagram](images/kanban.png)
 
 A kanban board is a simple and effective way to manage tasks. It consists of columns representing different stages of work.     
-Each task moves from left to right as your work progresses. The visual layout helps to identify bottleneck and ensure tasks are completed efficiently.    
-To keep track of my progress, I will use the kanban methodology to orgainse tasks into visual categories like:  
+Each task moves from left to right as your work progresses. The visual layout helps to identify bottlenecks and ensure tasks are completed efficiently.    
+To keep track of my progress, I will use the kanban methodology to organise tasks into visual categories like:  
 
 - To Do - eg. set up database models 
 - In Progress  - eg. plan and design documentation
@@ -321,8 +321,8 @@ How my Book A Doc system ensure data security:
 
 - **encryption:** passwords are hashed with bcrypt before storage
 - **HTTPS communication:** all API calls use HTTPS to encrypt data in transit
-- **role based access control (RBAC):** patients cannot access other user's booking
-- **cross origin resource sharing (CORS):** controls which clients can access my API
+- **role-based access control (RBAC):** patients cannot access other user's booking
+- **cross origin resource sharing (CORS):** controls which clients have access my API
 - **data security:** sensitive fields such as passwords are never stored in plain text
 
 An example of password hashing with bcrypt.js  
@@ -435,7 +435,7 @@ How my Book A doc system uses validation:
     - **reason:** I want flexibility in choosing a time that fits into my schedule    
 
 - **feature:** appointment management
-    - as a patient, I want to view, reschedule, or cancel my appointments so thatI can manage my healthcare easily  
+    - as a patient, I want to view, reschedule, or cancel my appointments so that I can manage my healthcare easily  
     - **reason:** I don't want to have to call to cancel or reschedule 
    
 2. Doctor user stories: 
@@ -500,8 +500,8 @@ The privacy policy page will explain what data is collected, how it's used, and 
 
 Since users will be booking appointments and managing personal details, I need to make sure the system is secure and that only authorised users can access their own data by:  
 
-- role base access control (RBAC): patients can only manage their own appointments, and doctor can only see their own schedule    
-- limit login attempts: I will Express Rate Limit to block too many failed attempts    
+- role-base access control (RBAC): patients can only manage their own appointments, and doctor can only see their own schedule    
+- limit login attempts: I will use Express Rate Limit to block too many failed attempts    
 - regular data backups: in case of system failure, backups will prevent data loss    
 
 Tools and implementation:    
