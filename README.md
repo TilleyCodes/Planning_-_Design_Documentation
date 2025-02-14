@@ -3,8 +3,7 @@
 ## Tables of Contents
 
 1. [Introduction](#introduction)  
-2. [Entity Relationship Diagram ](#entity-relationship-diagram)  
-    - [Entities, Relationships, and Foreign Keys](#entities-relationships-foreign-keys)  
+2. [Book A Doc Entity Relationship Diagram ](#book-a-doc-entity-relationship-diagram)   
 3. [Features and Functions](#features-and-functions)  
 4. [Programming Paradigm](#programming-paradigm)  
     - [Imperative programming](#imperative-programming)  
@@ -40,6 +39,11 @@
 
 My Book A Doc system is designed to make booking GP appointments quick and easy. Patients can sign up or login to book and manage their appointments.   
 The application allows patients to search available doctors and medical centres without having an account. However, if the patient wishes to make a booking, upon clicking the book button the system will direct the patient to either sign up or sign in to continue with the booking.
+
+
+## Book A Doc Entity Relationship Diagram
+
+![Book A Doc Entity Relationship Diagram](images/ERD.png)
 
 ## Features and Functions
 
