@@ -43,7 +43,7 @@ The application allows patients to search available doctors and medical centres 
 
 ## Book A Doc Entity Relationship Diagram
 
-![Book A Doc Entity Relationship Diagram](images/ERD.png)
+![Book A Doc Entity Relationship Diagram](images/ERD.png)   
 
 ## Features and Functions
 
